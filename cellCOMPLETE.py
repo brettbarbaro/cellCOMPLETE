@@ -4,11 +4,11 @@ Created on Tue Aug  2 10:29:18 2016
 
 @author: Brett Barbaro, Ludovic Autin, Shruti Verma
 
-needs to be run under Anaconda
+needs to be run under Anaconda3 (I think)
+as of 20190820 works with Python 3.7!!!!
+
 need to install:
-biopython
-requests
-openpyxl: conda install -c anaconda openpyxl
+biopython: conda install -c conda-forge biopython    (add -n <Environment name> to install in particular environment)
 
 Must have "HEADERS" in column 1 to mark header row, and "INCLUDE" column with value for every row to be included
 10.0.3 can now take xls and xlsx files.
