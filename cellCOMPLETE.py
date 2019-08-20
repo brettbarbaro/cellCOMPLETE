@@ -7,7 +7,11 @@ Created on Tue Aug  2 10:29:18 2016
 needs to be run under Anaconda3 (I think)
 as of 20190820 works with Python 3.7!!!! but apparently does not work with 2.7 any more. :( Maybe replace urllib with requests?
 
-Lines 1351-54, 2081-85, 2093 commented out ("inprogress" file lines) because not working
+can read version of Python being used with:
+import sys
+sys.version_info[0] # should be either 2 or 3 - change import statements based on this?
+
+Lines 1355-58, 2085-89, 2097 commented out ("inprogress" file lines) because not working
 
 need to install:
 biopython: conda install -c conda-forge biopython    (add -n <Environment name> to install in particular environment)
@@ -18,7 +22,6 @@ Must have "HEADERS" in column 1 to mark header row, and "INCLUDE" column with va
 
 
 import csv  # for dealing with .csv files
-import urllib.request, urllib.parse, urllib.error
 import urllib.request, urllib.error, urllib.parse  # for getting stuff off the web
 import os
 from html.parser import HTMLParser
@@ -39,7 +42,7 @@ print("hello")
 
 
 csvpath = """
-/Users/mac/Dropbox (Scripps Research)/Documents_dropbox/PBC Consortium/PBC_MODELS/insulin_secretory_granule/_ISG_menus_etc/_ISG_composite/ISG_Composite_BB309_test.xlsx
+/Users/mac/Dropbox (Scripps Research)/Documents_dropbox/PBC Consortium/PBC_MODELS/insulin_secretory_granule/_ISG_menus_etc/_ISG_composite/ISG_Composite_BB309_testb.xlsx
 """
 csvpath = csvpath.strip('\n')
 print(('csvpath = ' + csvpath))
