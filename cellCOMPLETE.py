@@ -8,7 +8,7 @@ needs to be run under Anaconda
 need to install:
 biopython
 requests
-openpyxl
+openpyxl: conda install -c anaconda openpyxl
 
 Must have "HEADERS" in column 1 to mark header row, and "INCLUDE" column with value for every row to be included
 10.0.3 can now take xls and xlsx files.
@@ -71,9 +71,9 @@ if csvpath.endswith('.xls') or csvpath.endswith('.xlsx'):
             columnNumber += 1
             if column.value == None:
                 continue
-            if type(column.value) == str:
-                all_data[rowNumber][columnNumber] = column.value.encode('UTF-8', errors='replace') # I put the encode() in to try to replace weird characters in the original spreadsheet. It doesn't seem to work. FIX
-                continue
+            # if type(column.value) == str:
+            #     all_data[rowNumber][columnNumber] = column.value.encode('UTF-8', errors='replace') # I put the encode() in to try to replace weird characters in the original spreadsheet. It doesn't seem to work. FIX
+            #     continue
             all_data[rowNumber][columnNumber] = column.value
 
 # possibly use Pandas:
@@ -186,7 +186,7 @@ taxlong = ''
 url = 'https://www.uniprot.org/uniprot/?query=organism%3A' + taxid + '&sort=score'
 response = urllib.request.urlopen(url)
 response_text = response.read()
-r = response_text
+r = str(response_text)
 cursorstring = str('/taxonomy/' + str(taxid) + '">')
 cursor = r.find(cursorstring) + len(cursorstring)
 if cursor == len(cursorstring)-1:
@@ -237,6 +237,7 @@ newLocations = []
 
 
 
+
 # look for headers and assign column numbers
 for x in range(0,len(all_data)):
     value = all_data[x][0]
@@ -244,6 +245,7 @@ for x in range(0,len(all_data)):
         headersrow = x
         print(('headersrow = ' + str(headersrow + 1)))
         break
+
 
 default_headers = ['HEADERS', 'INCLUDE', 'CONFIDENCE', 'ACCESSION', 'UNIPROT_ID', 'ORGANISM', 'GENE',
                    'UNIPROT_NAME', 'UNIPARC', 'NAME', 'SEQUENCE_ORIGINAL', 'MODIFIED SEQUENCE','FOUNDPDBS', 'chosenPDB',
@@ -1344,10 +1346,10 @@ def possible(x, source, target):
 
 def main(gi=0, accession=0, ipi=0, uniparc=0, sequence=0, modifiedSequence=0, foundpdbs=0, pdb='', opm=0, cleanopm=0, temp_filename=0, localization=0, PRINCIPAL_VECTOR=0, offset=0, JITTER_MAX=0, LENGTH=0, mw=0, cofactors=0, ligands=0, interactions =0):
     proteinNumber = 1
-    with open(str(model_dir + csvname + '_inprogress.csv'), 'wb') as csvprogress:  # opens progress file
-        for row in range(0, headersrow+1):
-            spamwriter = csv.writer(csvprogress)
-            spamwriter.writerow(all_data[row])
+    # with open(str(model_dir + csvname + '_inprogress.csv'), 'wb') as csvprogress:  # opens progress file
+    #     for row in range(0, headersrow+1):
+    #         spamwriter = csv.writer(csvprogress)
+    #         spamwriter.writerow(all_data[row])
     for x in range(headersrow + 1,len(all_data)):
         # if 'INCLUDE' in headers and all_data[x][headers['INCLUDE']] and all_data[x][headers['INCLUDE']] == 'X' or all_data[x][headers['INCLUDE']] == 'x' or all_data[x][headers['INCLUDE']] == 'TRUE':
         if 'INCLUDE' in headers and all_data[x][headers['INCLUDE']] == 'X':
@@ -2074,11 +2076,11 @@ def main(gi=0, accession=0, ipi=0, uniparc=0, sequence=0, modifiedSequence=0, fo
         output.append(all_data[x])
 
         # write entire results as _inprogress file so if crashes, everything saved. Can't just append lines, because won't work if columns are added.
-        with open(str(model_dir + csvname + '_inprogress.csv'), 'wb') as csvprogress:  # writes _inprogress file
-            spamwriter = csv.writer(csvprogress)
-            for row in range(len(output)):
-                spamwriter.writerow(output[row])
-            # print('appended row ' + str(x+1) + ' to _inprogress file')
+        # with open(str(model_dir + csvname + '_inprogress.csv'), 'wb') as csvprogress:  # writes _inprogress file
+        #     spamwriter = csv.writer(csvprogress)
+        #     for row in range(len(output)):
+        #         spamwriter.writerow(output[row])
+        #     # print('appended row ' + str(x+1) + ' to _inprogress file')
 
         # save interactionDict, because this represents a lot of work, and if saved, don't have to do again.
         with open(str(model_dir + csvname + '_' + str(taxid) + '_interactionDictionary.txt'), 'w') as intDict:  # saving interactionDict
