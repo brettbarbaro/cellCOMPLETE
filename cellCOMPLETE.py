@@ -7,6 +7,8 @@ Created on Tue Aug  2 10:29:18 2016
 needs to be run under Anaconda3 (I think)
 as of 20190820 works with Python 3.7!!!! but apparently does not work with 2.7 any more. :( Maybe replace urllib with requests?
 
+Lines 1351-54, 2081-85, 2093 commented out ("inprogress" file lines) because not working
+
 need to install:
 biopython: conda install -c conda-forge biopython    (add -n <Environment name> to install in particular environment)
 
@@ -2088,7 +2090,7 @@ def main(gi=0, accession=0, ipi=0, uniparc=0, sequence=0, modifiedSequence=0, fo
 
 main()
 
-os.rename(model_dir + csvname + '_inprogress.csv', model_dir + csvname + '_complete.csv')
+# os.rename(model_dir + csvname + '_inprogress.csv', model_dir + csvname + '_complete.csv')
 
 # print('interactionDict = ' + str(interactionDict))
 print(('newLocations = ' + str(newLocations)))
