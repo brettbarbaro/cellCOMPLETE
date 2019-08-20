@@ -5,7 +5,7 @@ Created on Tue Aug  2 10:29:18 2016
 @author: Brett Barbaro, Ludovic Autin, Shruti Verma
 
 needs to be run under Anaconda3 (I think)
-as of 20190820 works with Python 3.7!!!!
+as of 20190820 works with Python 3.7!!!! but apparently does not work with 2.7 any more. :( Maybe replace urllib with requests?
 
 need to install:
 biopython: conda install -c conda-forge biopython    (add -n <Environment name> to install in particular environment)
